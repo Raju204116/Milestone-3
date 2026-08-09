@@ -30,8 +30,9 @@
 // main func
 const addGrade = (students) => {
 
-  let newArr = [...students]  //to keep the original array unchanged
-  // console.log(newArr);
+  // let newArr = [...students];  //destructuring to keep the original array unchanged 
+ // console.log(newArr);          //no need of this,map directly returns a new array
+  
 
 
   // getting grades
@@ -42,12 +43,11 @@ const addGrade = (students) => {
 
 
   // adding grades
-  let addingGrades = newArr.map((eachStudent) => {  //eachStudnet = { name: 'Rafi', marks: 85 }, //an object, not an array
+  let addingGrades = students.map((eachStudent) => {  //eachStudnet = { name: 'Rafi', marks: 85 }, //an object, not an array
     let { name, marks } = eachStudent;
     //  console.log(name); //rafi, karim
     //  console.log(marks); //85,45
-    // let newStudentWithGrade ={name,marks,grade:gettingGrade(marks)} ; //assigning to a variable can also keep the original array unchanged
-    // return newStudentWithGrade;
+    // let newStudentWithGrade ={name,marks,grade:gettingGrade(marks)} ; 
 
     return { name, marks, grade: gettingGrade(marks) };
   })
@@ -61,7 +61,7 @@ let students = [
   { name: "Karim", marks: 45 }
 ]
 console.log(addGrade(students));
-console.log(students);//original remains same
+console.log("The original array:",students);//original remains same
 
 
 
