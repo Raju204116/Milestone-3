@@ -29,7 +29,7 @@ console.log("Original :",nums);
 
 
 
-
+console.log("Problem-2");
 /*
   Problem 2: Fix the Mutation Bug — Discount Preview
 
@@ -63,8 +63,6 @@ console.log("Original :",nums);
 //   });
 // };
 
-
-console.log("Problem-2");
 
 
 // Fix version
