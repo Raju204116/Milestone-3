@@ -67,7 +67,7 @@ console.log(findUserById(users,4));
 
 
 const getCartTotal=(cart)=>{
-  
+
   let total =cart.reduce((accum,eachItem)=>{
     let {price,qty}=eachItem;
     // console.log(qty);
@@ -75,6 +75,8 @@ const getCartTotal=(cart)=>{
     accum += price* qty;
     // console.log(accum);
     return accum;
+
+    // return accum + (price*qty);
     
   },0);
   // console.log("total=",total);
