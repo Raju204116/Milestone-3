@@ -170,13 +170,12 @@ const createAccount = (startingBalance) => {
 };
 
 const acc = createAccount(100); //100
-acc.deposit(50);                //150
+acc.deposit(50);                //100+50
 console.log(acc.getBalance());  //150
 
 
-
-
-
+acc.deposit(200);                //200+150
+console.log(acc.getBalance());   //350
 
 
 
@@ -197,13 +196,16 @@ console.log(acc.getBalance());  //150
 const sortByPriceAscending = (products) => {
   // TODO: copy with spread first, then .sort((a, b) => a.price - b.price)
 
-  let products2 = [...products]; //keeping the origianl same
+  // let products2 = [...products]; //keeping the origianl same
+  // return products2.sort((a,b)=>a.price -b.price);
 
-  return products2.sort((a,b)=>a.price -b.price)
+  //more short
+  return [...products].sort((a,b)=>a.price-b.price);
+
 
 };
 
-// console.log(sortByPriceAscending([{ name: "Bag", price: 500 }, { name: "Pen", price: 20 }]));
+console.log(sortByPriceAscending([{ name: "Bag", price: 500 }, { name: "Pen", price: 20 }]));
 
 
 
