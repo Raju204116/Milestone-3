@@ -108,21 +108,19 @@ function isStrictMatch(input, target) {
 
 
 /*  
-Task 10: getTopSellingProduct(orders) — Mixed (map + reduce, capstone-style)  //capstone means  combine concepts
+Task 10: getTopSellingProduct(orders) — Mixed (map + reduce, capstone-style)  //capstone-style means combine multiple concepts
 Given an array of orders { product, unitsSold }, 
 return the name of the product with the highest total units sold across all orders 
 (a product may appear in multiple orders).
 
 Input: [{ product: "Pen", unitsSold: 30 }, { product: "Bag", unitsSold: 12 }, { product: "Pen", unitsSold: 25 }] 
 Output: "Pen"
-
 */
 
 
+/*//my solution
 function getTopSellingProduct(orders) {
-
-    //my solution
-   /*  let highestSold = 0;
+     let highestSold = 0;
     let highestSoldName = "";
     for (let item of orders) {
         if (item.unitsSold > highestSold) {
@@ -132,14 +130,93 @@ function getTopSellingProduct(orders) {
             // console.log(highestSoldName);//pen
         }
     }
-    return highestSoldName; //pen */
+    return highestSoldName; //pen 
+}
+*/
 
 
-    //the  requirements actually say that pen =30+25=55, that's why pen is highestSoldName
 
+//But the requirements actually said that pen =30+25=55, that's why pen is highestSoldName
+//Here capstone = Aggregation + selection
+function getTopSellingProduct(orders) {
+  // Step 1: map orders into [product, unitsSold] pairs (not strictly needed, but shows map)
+  const pairs = orders.map(({ product, unitsSold }) => [product, unitsSold]);
+ //   console.log(pairs); //[ [ 'Pen', 30 ], [ 'Bag', 12 ], [ 'Pen', 25 ] ]
     
 
+  // Step 2: reduce pairs into totals
+  const totals = pairs.reduce((acc, [product, units]) => {
+    acc[product] = (acc[product] || 0) + units;
+    return acc;
+  }, {});
+ //   console.log(totals); //{ Pen: 55, Bag: 12 }
+  
+
+  // Step 3: find top product
+  let top = null;
+  for (const item in totals) {
+    if (top === null || totals[item] > totals[top]) top = item;
+  }
+ //   console.log(top); //pen
+  
+  return top;
 }
+    
+//Breakdown
+/* 
+Step	product	    units	acc[product] || 0	    new acc[product]	acc after this step
+1	    "Pen"	    30	    undefined || 0 → 0	    0 + 30 = 30	        { Pen: 30 }
+2	    "Bag"	    12	    undefined || 0 → 0	    0 + 12 = 12	        { Pen: 30, Bag: 12 }
+3	    "Pen"	    25	    30 || 0 → 30	        30 + 25 = 55	    { Pen: 55, Bag: 12 }
+
+
+What is acc?
+Acc is an object (starts as {}), used to accumulate totals. See that {} at the very end? That's the second argument to reduce — it's the initial value of acc. 
+It's an empty object, not an array. So acc starts as {} and grows into something like { Pen: 30, Bag: 12 } as we go.
+
+What is reduce((acc, [product, units]) ?
+Good catch — this is a different pattern than before. Here we're destructuring an array, not an object.
+Normally you'd write the parameter as a single name and access pieces manually:reduce((acc, pair) 
+But look at the pairs from map, It's an array of arrays — each inner array has exactly 2 items: [productName, unitsNumber]
+So [product, units]  - does that unpacking automatically, right at the point where the parameter is received.
+
+what is acc[product]?
+Since acc is a plain object, acc[product] is property access using a variable as the key — this is called bracket notation.
+
+
+Why acc[product] || 0 
+If acc[product] doesn't exist yet (i.e., this is the first time we've seen this product), acc[product] is undefined, 
+   which is falsy — so || 0 kicks in and gives us 0 instead. This avoids undefined + units which would produce NaN.
+
+If acc[product] does already exist (we've seen this product before), it just uses that existing number   + units
+
+
+
+*/
+
+
+
 
 let orders = [{ product: "Pen", unitsSold: 30 }, { product: "Bag", unitsSold: 12 }, { product: "Pen", unitsSold: 25 }];
 console.log(getTopSellingProduct(orders));
+
+
+
+
+
+
+
+
+
+
+
+
+
+//Observing object's log
+let test={ product: "Pen", unitsSold: 30 };
+for(let key in test){
+    // console.log(key); //product  //unitsSold
+
+    // console.log(test["product"]); //Pen
+    // console.log(test[key]); //pen //30
+}
