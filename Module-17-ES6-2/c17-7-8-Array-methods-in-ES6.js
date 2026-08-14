@@ -47,7 +47,7 @@
 Returns the first element that satisfies a condition.
 
 📌Returns: First matching element.
-Mutates: ❌
+Mutates: 
 
 const numbers = [10, 25, 30, 45];
 const result = numbers.find(number => number > 30);
@@ -73,7 +73,7 @@ console.log(user);
 Creates a new array containing all elements that satisfy a condition.
 
 📌Returns: New array.
-Mutates: ❌
+Mutates: 
 
 
 const numbers = [10, 15, 20, 25];
@@ -101,7 +101,7 @@ console.log(activeUsers);
 Creates a new array by transforming every element.
 
 📌Important: map() must return a value for each element.
-Mutates: ❌
+Mutates: 
 
 const numbers = [1, 2, 3, 4];
 const doubled = numbers.map(number => number * 2);
@@ -125,7 +125,7 @@ const updatedUsers = users.map(user => ({
 
 
 ✅✅4. reduce()
-Reduces an array into one final value.
+📌Reduces an array into one final value.
 
 const numbers = [10, 20, 30];
 const total = numbers.reduce((sum, number) => {
@@ -162,7 +162,7 @@ Array → Array
 Executes a function for each element.
 
 📌forEach() does not create/return a new array.
-Mutates: ❌ by itself.
+Mutates:  by itself.
 
 const numbers = [10, 20, 30];
 numbers.forEach(number => {
@@ -207,7 +207,7 @@ numbers.sort((a, b) => b - a);
 
 
 ✅✅7. findIndex()
-Returns the index of the first element satisfying a condition.
+📌Returns the index of the first element satisfying a condition.
 
 const numbers = [10, 25, 30, 45];
 const index = numbers.findIndex(number => number > 30);
@@ -222,7 +222,7 @@ console.log(index);
 Returns the index of the first occurrence of a value.
 
 📌Returns: Index or -1.
-Mutates: ❌
+Mutates: 
 
 const numbers = [10, 20, 30, 20];
 console.log(numbers.indexOf(20)); // 1
@@ -232,7 +232,7 @@ console.log(numbers.indexOf(50)); // -1
 
 
 ✅✅9. lastIndexOf()
-Returns the index of the last occurrence.
+📌Returns the index of the last occurrence.
 
 const numbers = [10, 20, 30, 20];
 console.log(numbers.lastIndexOf(20));
@@ -261,7 +261,7 @@ Checks whether at least one element satisfies a condition.
 
 📌Returns: Boolean.
 If at least one is true → true.
-Mutates: ❌
+Mutates: 
 
 const numbers = [10, 20, 35];
 const result = numbers.some(number => number > 30);
